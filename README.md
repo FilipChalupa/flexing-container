@@ -6,6 +6,10 @@
 npm install flexing-container
 ```
 
+## How to use
+
+You can get inspired by [Example here](src/stories/Example.tsx) and [Storybook demo here](https://flexing-container.netlify.app/).
+
 ## Development
 
 Run `npm start` and `npm run storybook` parallelly.
