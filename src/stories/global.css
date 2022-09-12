@@ -12,11 +12,10 @@ button {
 }
 
 .in {
-	display: inline-flex;
-	border: 1px solid;
-	background-color: #f0f0f0;
 }
 
 .content {
 	padding: 1rem;
+	border: 1px solid;
+	background-color: #f0f0f0;
 }
