@@ -1,10 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
+import { Example } from './Example'
 import './global.css'
-
-const Example: React.FunctionComponent = () => {
-	return <div>@TODO</div>
-}
 
 export default {
 	title: 'Example',

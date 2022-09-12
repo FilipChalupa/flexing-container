@@ -1,0 +1,11 @@
+.wrapper {
+	outline: 1px solid red;
+}
+
+.content_previous {
+	outline: 1px solid blue;
+}
+
+.content_current {
+	outline: 1px solid green;
+}

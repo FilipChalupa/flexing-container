@@ -1,3 +1,22 @@
 body {
 	font-family: sans-serif;
+	text-align: center;
+}
+
+button {
+	cursor: pointer;
+}
+
+.wrapper {
+	padding-top: 2rem;
+}
+
+.in {
+	display: inline-flex;
+	border: 1px solid;
+	background-color: #f0f0f0;
+}
+
+.content {
+	padding: 1rem;
 }
