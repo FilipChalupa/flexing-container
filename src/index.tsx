@@ -15,7 +15,11 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 	wrapper: Wrapper = ({ children }) => <>{children}</>,
 }) => {
 	const [previousContent, setPreviousContent] = useState(currentContent)
+	const [wrapperMeasureRef, { width: wrapperMeasureWidth }] =
+		useMeasure<HTMLDivElement>()
 	const [wrapperRef, { width: wrapperWidth }] = useMeasure<HTMLDivElement>()
+	const [previousContentRef, { width: previousContentWidth }] =
+		useMeasure<HTMLDivElement>()
 	const [
 		currentContentRef,
 		{ width: currentContentWidth, height: currentContentHeight },
@@ -34,22 +38,48 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 			className={`${styles.wrapper} ${styles[`is_align_${align}`]}`}
 			style={{
 				'--wrapperWidth': `${wrapperWidth}px`,
+				'--wrapperMeasureWidth': `${wrapperMeasureWidth}px`,
 				'--currentContentWidth': `${currentContentWidth}px`,
 				'--currentContentHeight': `${currentContentHeight}px`,
 			}}
 		>
-			<Wrapper>
-				<div className={styles.in}>
-					<div className={styles.content_wrapper}>
-						<div className={styles.content_previous}>{previousContent}</div>
-					</div>
-					<div className={styles.content_wrapper}>
-						<div className={styles.content_current} ref={currentContentRef}>
-							{currentContent}
+			<div className={styles.wrapperMeasure}>
+				<Wrapper>
+					<div ref={wrapperMeasureRef} />
+				</Wrapper>
+			</div>
+			<div className={styles.main}>
+				<Wrapper>
+					<div className={styles.in}>
+						<div
+							className={styles.content_wrapper}
+							style={{
+								'--contentWidth': `${previousContentWidth}px`,
+							}}
+						>
+							<div
+								className={`${styles.content} ${styles.is_previous}`}
+								ref={previousContentRef}
+							>
+								{previousContent}
+							</div>
+						</div>
+						<div
+							className={styles.content_wrapper}
+							style={{
+								'--contentWidth': `${currentContentWidth}px`,
+							}}
+						>
+							<div
+								className={`${styles.content} ${styles.is_current}`}
+								ref={currentContentRef}
+							>
+								{currentContent}
+							</div>
 						</div>
 					</div>
-				</div>
-			</Wrapper>
+				</Wrapper>
+			</div>
 		</div>
 	)
 }

@@ -1,18 +1,28 @@
 .wrapper {
 	outline: 1px solid red;
 	display: flex;
+	flex-direction: column;
 }
 
 .wrapper.is_align_start {
-	justify-content: flex-start;
+	align-items: flex-start;
 }
 
 .wrapper.is_align_center {
-	justify-content: center;
+	align-items: center;
 }
 
 .wrapper.is_align_end {
-	justify-content: flex-end;
+	align-items: flex-end;
+}
+
+.wrapperMeasure {
+	width: 100%;
+	height: 0;
+	visibility: hidden;
+}
+
+.main {
 }
 
 .in {
@@ -33,19 +43,43 @@
 
 .content_wrapper {
 	position: absolute;
-	inset: 0 0 auto;
+	top: 0;
+	width: var(--wrapperMeasureWidth);
 }
 
-.content_previous,
-.content_current {
-	position: absolute;
-	top: 0;
+.wrapper.is_align_start .content_wrapper {
 	left: 0;
 }
 
-.content_previous {
+.wrapper.is_align_center .content_wrapper {
+	left: calc(50% - var(--wrapperMeasureWidth) / 2)
+}
+
+.wrapper.is_align_end .content_wrapper {
+	right: 0;
+}
+
+.content {
+	position: absolute;
+	top: 0;
+}
+
+.wrapper.is_align_start .content {
+	left: 0;
+}
+
+.wrapper.is_align_center .content {
+	left: calc(50% - var(--contentWidth) / 2);
+}
+
+.wrapper.is_align_end .content {
+	right: 0;
+}
+
+
+.content.is_previous {
 	display: none; /* @TODO */
 }
 
-.content_current {
+.content.is_current {
 }

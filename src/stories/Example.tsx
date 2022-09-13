@@ -92,29 +92,34 @@ export const Example: FunctionComponent = () => {
 
 	return (
 		<div>
-			{items.map((item, i) => (
-				<button
-					type="button"
-					key={i}
-					onClick={() => {
-						setContent(item.content)
-					}}
-				>
-					{item.label}
-				</button>
-			))}
-
-			<div className="wrapper">
-				<div className="in">
-					<FlexingContainer
-						wrapper={({ children }) => (
-							<div className="content-wrapper">{children}</div>
-						)}
+			<div className="controls">
+				{items.map((item, i) => (
+					<button
+						type="button"
+						key={i}
+						onClick={() => {
+							setContent(item.content)
+						}}
 					>
-						<div className="content">{content}</div>
-					</FlexingContainer>
-				</div>
+						{item.label}
+					</button>
+				))}
 			</div>
+			{(['start', 'center', 'end'] as const).map((align) => (
+				<div className="wrapper" key={align}>
+					<h2>{align}</h2>
+					<div className="in">
+						<FlexingContainer
+							align={align}
+							wrapper={({ children }) => (
+								<div className="content-wrapper">{children}</div>
+							)}
+						>
+							<div className="content">{content}</div>
+						</FlexingContainer>
+					</div>
+				</div>
+			))}
 		</div>
 	)
 }
