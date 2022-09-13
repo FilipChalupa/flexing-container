@@ -1,5 +1,4 @@
 .wrapper {
-	outline: 1px solid red;
 	display: flex;
 	flex-direction: column;
 }
@@ -32,13 +31,6 @@
 	height: var(--currentContentHeight);
 	transition-property: width, height;
 	transition-duration: 0.3s;
-}
-
-@media (prefers-reduced-motion) {
-	.in {
-		transition-timing-function: step-end;
-		transition-duration: 1ms;
-	}
 }
 
 .content_wrapper {
@@ -76,10 +68,38 @@
 	right: 0;
 }
 
+@keyframes fadeout {
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+}
+
+.content {
+	animation-duration: 0.3s;
+	animation-fill-mode: both;
+}
 
 .content.is_previous {
-	display: none; /* @TODO */
+	animation-name: fadeout;
 }
 
 .content.is_current {
+	animation-name: fadein;
+}
+
+@media (prefers-reduced-motion) {
+	.in {
+		transition-timing-function: step-end;
+		transition-duration: 1ms;
+	}
+	.content {
+		animation-timing-function: step-end;
+		animation-duration: 1ms;
+	}
 }

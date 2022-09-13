@@ -1,4 +1,10 @@
-import React, { FunctionComponent, ReactNode, useEffect, useState } from 'react'
+import React, {
+	FunctionComponent,
+	ReactNode,
+	useEffect,
+	useRef,
+	useState,
+} from 'react'
 import { useMeasure } from 'react-use'
 import styles from './index.module.css'
 
@@ -14,30 +20,28 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 	align = 'center',
 	wrapper: Wrapper = ({ children }) => <>{children}</>,
 }) => {
+	const [key, setKey] = useState(1)
 	const [previousContent, setPreviousContent] = useState(currentContent)
+	const currentContentRef = useRef(currentContent)
 	const [wrapperMeasureRef, { width: wrapperMeasureWidth }] =
 		useMeasure<HTMLDivElement>()
-	const [wrapperRef, { width: wrapperWidth }] = useMeasure<HTMLDivElement>()
-	const [previousContentRef, { width: previousContentWidth }] =
+	const [previousContentElementRef, { width: previousContentWidth }] =
 		useMeasure<HTMLDivElement>()
 	const [
-		currentContentRef,
+		currentContentElementRef,
 		{ width: currentContentWidth, height: currentContentHeight },
 	] = useMeasure<HTMLDivElement>()
 
 	useEffect(() => {
-		console.log('swap')
-		setTimeout(() => {
-			setPreviousContent(currentContent)
-		}, 200)
+		setPreviousContent(currentContentRef.current)
+		setKey((value) => value + 1)
+		currentContentRef.current = currentContent
 	}, [currentContent])
 
 	return (
 		<div
-			ref={wrapperRef}
 			className={`${styles.wrapper} ${styles[`is_align_${align}`]}`}
 			style={{
-				'--wrapperWidth': `${wrapperWidth}px`,
 				'--wrapperMeasureWidth': `${wrapperMeasureWidth}px`,
 				'--currentContentWidth': `${currentContentWidth}px`,
 				'--currentContentHeight': `${currentContentHeight}px`,
@@ -58,8 +62,9 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 							}}
 						>
 							<div
+								key={key}
 								className={`${styles.content} ${styles.is_previous}`}
-								ref={previousContentRef}
+								ref={previousContentElementRef}
 							>
 								{previousContent}
 							</div>
@@ -71,8 +76,9 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 							}}
 						>
 							<div
+								key={key}
 								className={`${styles.content} ${styles.is_current}`}
-								ref={currentContentRef}
+								ref={currentContentElementRef}
 							>
 								{currentContent}
 							</div>
