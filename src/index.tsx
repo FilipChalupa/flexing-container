@@ -5,12 +5,14 @@ import styles from './index.module.css'
 export type FlexingContainerProps = {
 	children?: ReactNode
 	align?: 'start' | 'center' | 'end'
+	wrapper?: (props: { children: ReactNode }) => JSX.Element
 	// transition?: 'swipeFromLeft' | '…' @TODO
 }
 
 export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 	children: currentContent,
 	align = 'center',
+	wrapper: Wrapper = ({ children }) => <>{children}</>,
 }) => {
 	const [previousContent, setPreviousContent] = useState(currentContent)
 	const [wrapperRef, { width: wrapperWidth }] = useMeasure<HTMLDivElement>()
@@ -36,16 +38,18 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 				'--currentContentHeight': `${currentContentHeight}px`,
 			}}
 		>
-			<div className={styles.in}>
-				<div className={styles.content_wrapper}>
-					<div className={styles.content_previous}>{previousContent}</div>
-				</div>
-				<div className={styles.content_wrapper}>
-					<div className={styles.content_current} ref={currentContentRef}>
-						{currentContent}
+			<Wrapper>
+				<div className={styles.in}>
+					<div className={styles.content_wrapper}>
+						<div className={styles.content_previous}>{previousContent}</div>
+					</div>
+					<div className={styles.content_wrapper}>
+						<div className={styles.content_current} ref={currentContentRef}>
+							{currentContent}
+						</div>
 					</div>
 				</div>
-			</div>
+			</Wrapper>
 		</div>
 	)
 }

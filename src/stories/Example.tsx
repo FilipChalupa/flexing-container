@@ -106,7 +106,11 @@ export const Example: FunctionComponent = () => {
 
 			<div className="wrapper">
 				<div className="in">
-					<FlexingContainer>
+					<FlexingContainer
+						wrapper={({ children }) => (
+							<div className="content-wrapper">{children}</div>
+						)}
+					>
 						<div className="content">{content}</div>
 					</FlexingContainer>
 				</div>
