@@ -116,7 +116,7 @@ export const Example: FunctionComponent<
 				<div className="in">
 					<FlexingContainer
 						align={align}
-						wrapper={({ children }) => (
+						wrap={({ children }) => (
 							<div className="content-wrapper">{children}</div>
 						)}
 					>

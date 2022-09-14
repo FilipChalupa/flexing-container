@@ -11,14 +11,14 @@ import styles from './index.module.css'
 export type FlexingContainerProps = {
 	children?: ReactNode
 	align?: 'start' | 'center' | 'end'
-	wrapper?: (props: { children: ReactNode }) => JSX.Element
+	wrap?: (props: { children: ReactNode }) => JSX.Element
 	// transition?: 'swipeFromLeft' | '…' @TODO
 }
 
 export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 	children: currentContent,
 	align = 'center',
-	wrapper: Wrapper = ({ children }) => <>{children}</>,
+	wrap = ({ children }) => <>{children}</>,
 }) => {
 	const [key, setKey] = useState(1)
 	const [previousContent, setPreviousContent] = useState(currentContent)
@@ -48,43 +48,43 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 			}}
 		>
 			<div className={styles.wrapperMeasure}>
-				<Wrapper>
-					<div ref={wrapperMeasureRef} />
-				</Wrapper>
+				{wrap({ children: <div ref={wrapperMeasureRef} /> })}
 			</div>
 			<div className={styles.main}>
-				<Wrapper>
-					<div className={styles.in}>
-						<div
-							className={styles.content_wrapper}
-							style={{
-								'--contentWidth': `${previousContentWidth}px`,
-							}}
-						>
+				{wrap({
+					children: (
+						<div className={styles.in}>
 							<div
-								key={key}
-								className={`${styles.content} ${styles.is_previous}`}
-								ref={previousContentElementRef}
+								className={styles.content_wrapper}
+								style={{
+									'--contentWidth': `${previousContentWidth}px`,
+								}}
 							>
-								{previousContent}
+								<div
+									key={key}
+									className={`${styles.content} ${styles.is_previous}`}
+									ref={previousContentElementRef}
+								>
+									{previousContent}
+								</div>
+							</div>
+							<div
+								className={styles.content_wrapper}
+								style={{
+									'--contentWidth': `${currentContentWidth}px`,
+								}}
+							>
+								<div
+									key={key}
+									className={`${styles.content} ${styles.is_current}`}
+									ref={currentContentElementRef}
+								>
+									{currentContent}
+								</div>
 							</div>
 						</div>
-						<div
-							className={styles.content_wrapper}
-							style={{
-								'--contentWidth': `${currentContentWidth}px`,
-							}}
-						>
-							<div
-								key={key}
-								className={`${styles.content} ${styles.is_current}`}
-								ref={currentContentElementRef}
-							>
-								{currentContent}
-							</div>
-						</div>
-					</div>
-				</Wrapper>
+					),
+				})}
 			</div>
 		</div>
 	)
