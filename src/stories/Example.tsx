@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useMemo, useState } from 'react'
-import { FlexingContainer } from '../index'
+import { FlexingContainer, FlexingContainerProps } from '../index'
 
-export const Example: FunctionComponent = () => {
+export const Example: FunctionComponent<
+	Pick<FlexingContainerProps, 'align'>
+> = ({ align }) => {
 	const items = useMemo(
 		() => [
 			{
@@ -88,38 +90,40 @@ export const Example: FunctionComponent = () => {
 		[],
 	)
 
-	const [content, setContent] = useState(() => items[0].content)
+	const [activeItemIndex, setActiveItemIndex] = useState(() => 0)
+	const content = useMemo(
+		() => items[activeItemIndex].content,
+		[items, activeItemIndex],
+	)
 
 	return (
 		<div>
 			<div className="controls">
 				{items.map((item, i) => (
 					<button
+						disabled={i === activeItemIndex}
 						type="button"
 						key={i}
 						onClick={() => {
-							setContent(item.content)
+							setActiveItemIndex(i)
 						}}
 					>
 						{item.label}
 					</button>
 				))}
 			</div>
-			{(['start', 'center', 'end'] as const).map((align) => (
-				<div className="wrapper" key={align}>
-					<h2>{align}</h2>
-					<div className="in">
-						<FlexingContainer
-							align={align}
-							wrapper={({ children }) => (
-								<div className="content-wrapper">{children}</div>
-							)}
-						>
-							<div className="content">{content}</div>
-						</FlexingContainer>
-					</div>
+			<div className="wrapper" key={align}>
+				<div className="in">
+					<FlexingContainer
+						align={align}
+						wrapper={({ children }) => (
+							<div className="content-wrapper">{children}</div>
+						)}
+					>
+						<div className="content">{content}</div>
+					</FlexingContainer>
 				</div>
-			))}
+			</div>
 		</div>
 	)
 }

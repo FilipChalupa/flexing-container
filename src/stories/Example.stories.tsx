@@ -6,6 +6,13 @@ import './global.css'
 export default {
 	title: 'Example',
 	component: Example,
+	argTypes: {
+		align: {
+			options: ['start', 'center', 'end'],
+			control: { type: 'radio' },
+			defaultValue: 'center',
+		},
+	},
 } as ComponentMeta<typeof Example>
 
 const Template: ComponentStory<typeof Example> = (args) => <Example {...args} />
