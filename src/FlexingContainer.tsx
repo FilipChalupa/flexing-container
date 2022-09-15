@@ -21,6 +21,8 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 	wrap = ({ children }) => <>{children}</>,
 }) => {
 	const [key, setKey] = useState(1)
+
+	// @TODO: rewrite to use array of previous contents
 	const [previousContent, setPreviousContent] = useState(currentContent)
 	const currentContentRef = useRef(currentContent)
 	const [wrapperMeasureRef, { width: wrapperMeasureWidth }] =
