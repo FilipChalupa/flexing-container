@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo, useState } from 'react'
-import { FlexingContainer, FlexingContainerProps } from '../index'
+import { FlexingContainer, FlexingContainerProps } from '..'
 
 export const Example: FunctionComponent<
 	Pick<FlexingContainerProps, 'align'>

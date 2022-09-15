@@ -6,7 +6,7 @@ import React, {
 	useState,
 } from 'react'
 import { useMeasure } from 'react-use'
-import styles from './index.module.css'
+import styles from './FlexingContainer.module.css'
 
 export type FlexingContainerProps = {
 	children?: ReactNode
