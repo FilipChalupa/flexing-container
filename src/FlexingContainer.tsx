@@ -8,6 +8,10 @@ import React, {
 import { useMeasure } from 'react-use'
 import styles from './FlexingContainer.module.css'
 
+/* useMeasure not working on zero sized element workaround */
+const verticalCompensation = -1
+const horizontalCompensation = -2
+
 export type FlexingContainerProps = {
 	children?: ReactNode
 	align?: 'start' | 'center' | 'end'
@@ -65,10 +69,11 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 			className={`${styles.wrapper} ${styles[`is_align_${align}`]}`}
 			style={{
 				'--wrapperMeasureWidth': `${wrapperMeasureWidth}px`,
-				'--currentContentWidth': `${currentContentWidth}px`,
+				'--currentContentWidth': `${
+					currentContentWidth + horizontalCompensation
+				}px`,
 				'--currentContentHeight': `${
-					currentContentHeight -
-					1 /* useMeasure not working on zero height element workaround */
+					currentContentHeight + verticalCompensation
 				}px`,
 			}}
 		>
@@ -86,7 +91,7 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 										key={key}
 										className={styles.content_wrapper}
 										style={{
-											'--contentWidth': `${width}px`,
+											'--contentWidth': `${width + horizontalCompensation}px`,
 										}}
 									>
 										<div

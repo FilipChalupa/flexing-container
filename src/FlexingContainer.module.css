@@ -84,10 +84,11 @@
 	animation-duration: 0.3s;
 	animation-fill-mode: both;
 
-	/* useMeasure not working on zero height element workaround */
+	/* useMeasure not working on zero sized element workaround */
 	min-height: 1px;
-	padding-top: 1px;
-	margin-top: -1px;
+	min-width: 2px;
+	margin: -1px -1px 0;
+	padding: 1px 1px 0
 }
 
 .content.is_previous {
