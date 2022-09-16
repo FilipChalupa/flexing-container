@@ -12,7 +12,7 @@ import styles from './FlexingContainer.module.css'
 const verticalCompensation = -1
 const horizontalCompensation = -2
 
-export type FlexingContainerProps = {
+export interface FlexingContainerProps {
 	children?: ReactNode
 	align?: 'start' | 'center' | 'end'
 	wrap?: (props: { children: ReactNode }) => JSX.Element
