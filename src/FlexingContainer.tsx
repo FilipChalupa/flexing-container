@@ -1,4 +1,10 @@
-import React, { FunctionComponent, ReactNode, useEffect, useState } from 'react'
+import React, {
+	FunctionComponent,
+	ReactNode,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react'
 import { useMeasure } from 'react-use'
 import styles from './FlexingContainer.module.css'
 
@@ -50,6 +56,10 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 		)
 	}, [currentContentWidth])
 
+	const handleAnimationEnd = useCallback(() => {
+		setContents(([_oldest, ...contents]) => contents)
+	}, [])
+
 	return (
 		<div
 			className={`${styles.wrapper} ${styles[`is_align_${align}`]}`}
@@ -81,6 +91,9 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 											className={`${styles.content} ${
 												isCurrent ? styles.is_current : styles.is_previous
 											}`}
+											onAnimationEnd={
+												isCurrent ? undefined : handleAnimationEnd
+											}
 											ref={isCurrent ? currentContentElementRef : undefined}
 										>
 											{children}
