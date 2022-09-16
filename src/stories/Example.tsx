@@ -10,10 +10,12 @@ export const Example: FunctionComponent<
 				label: 'First',
 				content: (
 					<div style={{ maxWidth: '20rem' }}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-						repudiandae praesentium, nemo nesciunt officiis velit neque
-						repellendus fuga eligendi suscipit earum et? Labore, velit odio?
-						Incidunt vitae nostrum eligendi voluptatum?
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+							repudiandae praesentium, nemo nesciunt officiis velit neque
+							repellendus fuga eligendi suscipit earum et? Labore, velit odio?
+							Incidunt vitae nostrum eligendi voluptatum?
+						</p>
 					</div>
 				),
 			},
