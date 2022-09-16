@@ -83,6 +83,11 @@
 .content {
 	animation-duration: 0.3s;
 	animation-fill-mode: both;
+
+	/* useMeasure not working on zero height element workaround */
+	min-height: 1px;
+	padding-top: 1px;
+	margin-top: -1px;
 }
 
 .content.is_previous {

@@ -44,7 +44,7 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 	const [
 		currentContentElementRef,
 		{ width: currentContentWidth, height: currentContentHeight },
-	] = useMeasure<HTMLDivElement>() // @TODO: handle why zero width content does't trigger useMeasure
+	] = useMeasure<HTMLDivElement>()
 
 	useEffect(() => {
 		setContents((contents) =>
@@ -66,7 +66,10 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 			style={{
 				'--wrapperMeasureWidth': `${wrapperMeasureWidth}px`,
 				'--currentContentWidth': `${currentContentWidth}px`,
-				'--currentContentHeight': `${currentContentHeight}px`,
+				'--currentContentHeight': `${
+					currentContentHeight -
+					1 /* useMeasure not working on zero height element workaround */
+				}px`,
 			}}
 		>
 			<div className={styles.wrapperMeasure}>
