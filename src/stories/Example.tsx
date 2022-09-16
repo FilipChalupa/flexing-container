@@ -86,6 +86,10 @@ export const Example: FunctionComponent<
 					</div>
 				),
 			},
+			{
+				label: 'Empty',
+				content: null,
+			},
 		],
 		[],
 	)
