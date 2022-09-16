@@ -44,7 +44,7 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 	const [
 		currentContentElementRef,
 		{ width: currentContentWidth, height: currentContentHeight },
-	] = useMeasure<HTMLDivElement>()
+	] = useMeasure<HTMLDivElement>() // @TODO: handle why zero width content does't trigger useMeasure
 
 	useEffect(() => {
 		setContents((contents) =>
