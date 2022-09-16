@@ -25,6 +25,7 @@ module.exports = {
 		'react-hooks/rules-of-hooks': 'error',
 		'react-hooks/exhaustive-deps': 'warn',
 		'comma-dangle': 'off',
+		'@typescript-eslint/consistent-type-assertions': 'off',
 	},
 	settings: {
 		react: {
