@@ -1,10 +1,4 @@
-import React, {
-	FunctionComponent,
-	ReactNode,
-	useEffect,
-	useRef,
-	useState,
-} from 'react'
+import React, { FunctionComponent, ReactNode, useEffect, useState } from 'react'
 import { useMeasure } from 'react-use'
 import styles from './FlexingContainer.module.css'
 
@@ -16,18 +10,30 @@ export type FlexingContainerProps = {
 }
 
 export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
-	children: currentContent,
+	children,
 	align = 'center',
 	wrap = ({ children }) => <>{children}</>,
 }) => {
-	const [key, setKey] = useState(1)
+	const [contents, setContents] = useState<
+		Array<{
+			children: ReactNode
+			width: number
+			key: number
+		}>
+	>([])
 
-	// @TODO: rewrite to use array of previous contents
-	const [previousContent, setPreviousContent] = useState(currentContent)
-	const currentContentRef = useRef(currentContent)
+	useEffect(() => {
+		setContents((contents) => [
+			...contents,
+			{
+				children,
+				width: 0,
+				key: (contents[contents.length - 1]?.key ?? 0) + 1,
+			},
+		])
+	}, [children])
+
 	const [wrapperMeasureRef, { width: wrapperMeasureWidth }] =
-		useMeasure<HTMLDivElement>()
-	const [previousContentElementRef, { width: previousContentWidth }] =
 		useMeasure<HTMLDivElement>()
 	const [
 		currentContentElementRef,
@@ -35,10 +41,14 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 	] = useMeasure<HTMLDivElement>()
 
 	useEffect(() => {
-		setPreviousContent(currentContentRef.current)
-		setKey((value) => value + 1)
-		currentContentRef.current = currentContent
-	}, [currentContent])
+		setContents((contents) =>
+			contents.map((content, i) =>
+				i < contents.length - 1
+					? content
+					: { ...content, width: currentContentWidth },
+			),
+		)
+	}, [currentContentWidth])
 
 	return (
 		<div
@@ -56,34 +66,28 @@ export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 				{wrap({
 					children: (
 						<div className={styles.in}>
-							<div
-								className={styles.content_wrapper}
-								style={{
-									'--contentWidth': `${previousContentWidth}px`,
-								}}
-							>
-								<div
-									key={key}
-									className={`${styles.content} ${styles.is_previous}`}
-									ref={previousContentElementRef}
-								>
-									{previousContent}
-								</div>
-							</div>
-							<div
-								className={styles.content_wrapper}
-								style={{
-									'--contentWidth': `${currentContentWidth}px`,
-								}}
-							>
-								<div
-									key={key}
-									className={`${styles.content} ${styles.is_current}`}
-									ref={currentContentElementRef}
-								>
-									{currentContent}
-								</div>
-							</div>
+							{contents.map(({ children, width, key }, i) => {
+								const isCurrent = i === contents.length - 1
+								return (
+									<div
+										key={key}
+										className={styles.content_wrapper}
+										style={{
+											'--contentWidth': `${width}px`,
+										}}
+									>
+										<div
+											key={key}
+											className={`${styles.content} ${
+												isCurrent ? styles.is_current : styles.is_previous
+											}`}
+											ref={isCurrent ? currentContentElementRef : undefined}
+										>
+											{children}
+										</div>
+									</div>
+								)
+							})}
 						</div>
 					),
 				})}
