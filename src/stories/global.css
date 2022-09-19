@@ -29,9 +29,11 @@ img {
 }
 
 .content-wrapper {
-	border: 1px solid;
+	border: 1px solid #878787;
 	background-color: #f0f0f0;
 	padding: 1rem;
+	border-radius: 1rem;
+	box-shadow: 0.5rem 0.5rem 1rem #eeeeee;
 }
 
 .content {
