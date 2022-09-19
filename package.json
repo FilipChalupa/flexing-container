@@ -67,5 +67,8 @@
 	},
 	"files": [
 		"/dist/"
-	]
+	],
+	"dependencies": {
+		"@types/resize-observer-browser": "^0.1.7"
+	}
 }
