@@ -14,13 +14,15 @@ export default {
 		},
 		transition: {
 			options: [
+				'crossFade',
 				'swipeFromLeft',
 				'swipeFromRight',
 				'swipeFromTop',
 				'swipeFromBottom',
+				'grow',
 			],
 			control: { type: 'radio' },
-			defaultValue: 'swipeFromLeft',
+			defaultValue: 'crossFade',
 		},
 	},
 } as ComponentMeta<typeof Example>

@@ -21,8 +21,7 @@
 	visibility: hidden;
 }
 
-.main {
-}
+.main {}
 
 .in {
 	overflow: hidden;
@@ -101,7 +100,12 @@
 
 .transitionContainer {
 	animation-duration: 0.3s;
+	transform-origin: 50% 0;
 }
+
+.content.is_current .transitionContainer.is_transition_crossFade {}
+
+.content.is_previous .transitionContainer.is_transition_crossFade {}
 
 @keyframes swipeFromLeft-enter {
 	from {
@@ -113,6 +117,14 @@
 	to {
 		transform: translateX(6rem);
 	}
+}
+
+.content.is_current .transitionContainer.is_transition_swipeFromLeft {
+	animation-name: swipeFromLeft-enter;
+}
+
+.content.is_previous .transitionContainer.is_transition_swipeFromLeft {
+	animation-name: swipeFromLeft-leave;
 }
 
 @keyframes swipeFromRight-enter {
@@ -127,6 +139,14 @@
 	}
 }
 
+.content.is_current .transitionContainer.is_transition_swipeFromRight {
+	animation-name: swipeFromRight-enter;
+}
+
+.content.is_previous .transitionContainer.is_transition_swipeFromRight {
+	animation-name: swipeFromRight-leave;
+}
+
 @keyframes swipeFromTop-enter {
 	from {
 		transform: translateY(-6rem);
@@ -137,6 +157,14 @@
 	to {
 		transform: translateY(6rem);
 	}
+}
+
+.content.is_current .transitionContainer.is_transition_swipeFromTop {
+	animation-name: swipeFromTop-enter;
+}
+
+.content.is_previous .transitionContainer.is_transition_swipeFromTop {
+	animation-name: swipeFromTop-leave;
 }
 
 @keyframes swipeFromBottom-enter {
@@ -151,36 +179,32 @@
 	}
 }
 
-.content.is_current .transitionContainer.is_transition_swipeFromLeft {
-	animation-name: swipeFromLeft-enter;
-}
-
-.content.is_previous .transitionContainer.is_transition_swipeFromLeft {
-	animation-name: swipeFromLeft-leave;
-}
-
-.content.is_current .transitionContainer.is_transition_swipeFromRight {
-	animation-name: swipeFromRight-enter;
-}
-
-.content.is_previous .transitionContainer.is_transition_swipeFromRight {
-	animation-name: swipeFromRight-leave;
-}
-
-.content.is_current .transitionContainer.is_transition_swipeFromTop {
-	animation-name: swipeFromTop-enter;
-}
-
-.content.is_previous .transitionContainer.is_transition_swipeFromTop {
-	animation-name: swipeFromTop-leave;
-}
-
 .content.is_current .transitionContainer.is_transition_swipeFromBottom {
 	animation-name: swipeFromBottom-enter;
 }
 
 .content.is_previous .transitionContainer.is_transition_swipeFromBottom {
 	animation-name: swipeFromBottom-leave;
+}
+
+@keyframes grow-enter {
+	from {
+		transform: scale(0.8);
+	}
+}
+
+@keyframes grow-leave {
+	to {
+		transform: scale(0.8);
+	}
+}
+
+.content.is_current .transitionContainer.is_transition_grow {
+	animation-name: grow-enter;
+}
+
+.content.is_previous .transitionContainer.is_transition_grow {
+	animation-name: grow-leave;
 }
 
 @media (prefers-reduced-motion) {

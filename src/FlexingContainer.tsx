@@ -17,17 +17,19 @@ export interface FlexingContainerProps {
 	align?: 'start' | 'center' | 'end'
 	wrap?: (props: { children: ReactNode }) => JSX.Element
 	transition?:
+		| 'crossFade'
 		| 'swipeFromLeft'
 		| 'swipeFromRight'
 		| 'swipeFromTop'
-		| 'swipeFromBottom' // @TODO: add more
+		| 'swipeFromBottom'
+		| 'grow'
 }
 
 export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({
 	children,
 	align = 'center',
 	wrap = ({ children }) => <>{children}</>,
-	transition = 'swipeFromLeft',
+	transition = 'crossFade',
 }) => {
 	const [contents, setContents] = useState<
 		Array<{
