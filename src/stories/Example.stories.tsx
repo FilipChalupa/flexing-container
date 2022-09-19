@@ -20,6 +20,7 @@ export default {
 				'swipeFromTop',
 				'swipeFromBottom',
 				'grow',
+				'shrink',
 			],
 			control: { type: 'radio' },
 			defaultValue: 'crossFade',

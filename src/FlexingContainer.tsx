@@ -23,6 +23,7 @@ export interface FlexingContainerProps {
 		| 'swipeFromTop'
 		| 'swipeFromBottom'
 		| 'grow'
+		| 'shrink'
 }
 
 export const FlexingContainer: FunctionComponent<FlexingContainerProps> = ({

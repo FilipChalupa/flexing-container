@@ -195,7 +195,7 @@
 
 @keyframes grow-leave {
 	to {
-		transform: scale(0.8);
+		transform: scale(1.2);
 	}
 }
 
@@ -205,6 +205,26 @@
 
 .content.is_previous .transitionContainer.is_transition_grow {
 	animation-name: grow-leave;
+}
+
+@keyframes shrink-enter {
+	from {
+		transform: scale(1.2);
+	}
+}
+
+@keyframes shrink-leave {
+	to {
+		transform: scale(0.5);
+	}
+}
+
+.content.is_current .transitionContainer.is_transition_shrink {
+	animation-name: shrink-enter;
+}
+
+.content.is_previous .transitionContainer.is_transition_shrink {
+	animation-name: shrink-leave;
 }
 
 @media (prefers-reduced-motion) {
