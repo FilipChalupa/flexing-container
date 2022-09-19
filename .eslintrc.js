@@ -26,6 +26,8 @@ module.exports = {
 		'react-hooks/exhaustive-deps': 'warn',
 		'comma-dangle': 'off',
 		'@typescript-eslint/consistent-type-assertions': 'off',
+		'@typescript-eslint/explicit-function-return-type': 'off',
+		'@typescript-eslint/strict-boolean-expressions': 'off',
 	},
 	settings: {
 		react: {

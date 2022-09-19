@@ -20,7 +20,7 @@ export default {
 			sourcemap: true,
 		},
 	],
-	external: ['react', 'react-use'],
+	external: ['react'],
 	plugins: [
 		peerDepsExternal(),
 		resolve(),
