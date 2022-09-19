@@ -12,6 +12,16 @@ export default {
 			control: { type: 'radio' },
 			defaultValue: 'center',
 		},
+		transition: {
+			options: [
+				'swipeFromLeft',
+				'swipeFromRight',
+				'swipeFromTop',
+				'swipeFromBottom',
+			],
+			control: { type: 'radio' },
+			defaultValue: 'swipeFromLeft',
+		},
 	},
 } as ComponentMeta<typeof Example>
 

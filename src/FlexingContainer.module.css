@@ -68,13 +68,13 @@
 	right: 0;
 }
 
-@keyframes fadeout {
+@keyframes fade-leave {
 	to {
 		opacity: 0;
 	}
 }
 
-@keyframes fadein {
+@keyframes fade-enter {
 	from {
 		opacity: 0;
 	}
@@ -92,11 +92,95 @@
 }
 
 .content.is_previous {
-	animation-name: fadeout;
+	animation-name: fade-leave;
 }
 
 .content.is_current {
-	animation-name: fadein;
+	animation-name: fade-enter;
+}
+
+.transitionContainer {
+	animation-duration: 0.3s;
+}
+
+@keyframes swipeFromLeft-enter {
+	from {
+		transform: translateX(-6rem);
+	}
+}
+
+@keyframes swipeFromLeft-leave {
+	to {
+		transform: translateX(6rem);
+	}
+}
+
+@keyframes swipeFromRight-enter {
+	from {
+		transform: translateX(6rem);
+	}
+}
+
+@keyframes swipeFromRight-leave {
+	to {
+		transform: translateX(-6rem);
+	}
+}
+
+@keyframes swipeFromTop-enter {
+	from {
+		transform: translateY(-6rem);
+	}
+}
+
+@keyframes swipeFromTop-leave {
+	to {
+		transform: translateY(6rem);
+	}
+}
+
+@keyframes swipeFromBottom-enter {
+	from {
+		transform: translateY(6rem);
+	}
+}
+
+@keyframes swipeFromBottom-leave {
+	to {
+		transform: translateY(-6rem);
+	}
+}
+
+.content.is_current .transitionContainer.is_transition_swipeFromLeft {
+	animation-name: swipeFromLeft-enter;
+}
+
+.content.is_previous .transitionContainer.is_transition_swipeFromLeft {
+	animation-name: swipeFromLeft-leave;
+}
+
+.content.is_current .transitionContainer.is_transition_swipeFromRight {
+	animation-name: swipeFromRight-enter;
+}
+
+.content.is_previous .transitionContainer.is_transition_swipeFromRight {
+	animation-name: swipeFromRight-leave;
+}
+
+.content.is_current .transitionContainer.is_transition_swipeFromTop {
+	animation-name: swipeFromTop-enter;
+}
+
+.content.is_previous .transitionContainer.is_transition_swipeFromTop {
+	animation-name: swipeFromTop-leave;
+}
+
+.content.is_current .transitionContainer.is_transition_swipeFromBottom {
+	animation-name: swipeFromBottom-enter;
+}
+
+.content.is_previous .transitionContainer.is_transition_swipeFromBottom {
+	animation-name: swipeFromBottom-leave;
 }
 
 @media (prefers-reduced-motion) {
@@ -104,7 +188,8 @@
 		transition-timing-function: step-end;
 		transition-duration: 1ms;
 	}
-	.content {
+	.content,
+	.transitionContainer {
 		animation-timing-function: step-end;
 		animation-duration: 1ms;
 	}

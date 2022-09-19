@@ -2,8 +2,8 @@ import React, { FunctionComponent, useMemo, useState } from 'react'
 import { FlexingContainer, FlexingContainerProps } from '..'
 
 export const Example: FunctionComponent<
-	Pick<FlexingContainerProps, 'align'>
-> = ({ align }) => {
+	Pick<FlexingContainerProps, 'align' | 'transition'>
+> = ({ align, transition }) => {
 	const items = useMemo(
 		() => [
 			{
@@ -113,6 +113,9 @@ export const Example: FunctionComponent<
 						onClick={() => {
 							setActiveItemIndex(i)
 						}}
+						onMouseEnter={() => {
+							setActiveItemIndex(i)
+						}}
 					>
 						{item.label}
 					</button>
@@ -122,6 +125,7 @@ export const Example: FunctionComponent<
 				<div className="in">
 					<FlexingContainer
 						align={align}
+						transition={transition}
 						wrap={({ children }) => (
 							<div className="content-wrapper">{children}</div>
 						)}
