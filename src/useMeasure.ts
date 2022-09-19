@@ -34,7 +34,7 @@ export const useMeasure = <
 
 	const observer = useMemo(
 		() =>
-			new (window as any).ResizeObserver((entries) => {
+			new ResizeObserver((entries) => {
 				if (entries[0]) {
 					const { x, y, width, height, top, left, bottom, right } =
 						entries[0].contentRect
@@ -45,7 +45,10 @@ export const useMeasure = <
 	)
 
 	useIsomorphicLayoutEffect(() => {
-		if (element == null) return
+		if (element == null) {
+			return
+		}
+
 		observer.observe(element)
 		return () => {
 			observer.disconnect()
